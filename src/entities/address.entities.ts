@@ -17,6 +17,6 @@ export class Address {
   @Column({ length: 50, type: "varchar" })
   city: string;
 
-  @Column({ length: 50, type: "varchar" })
+  @Column({ length: 2, type: "varchar" })
   state: string;
 }
