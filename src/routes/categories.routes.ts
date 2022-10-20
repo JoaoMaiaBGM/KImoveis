@@ -2,7 +2,6 @@ import { Router } from "express";
 import createCategoryController from "../controllers/categories/createCategory.controller";
 import listCategoriesController from "../controllers/categories/listCategories.controller";
 import listCategoryByIdController from "../controllers/categories/listCategoryById.controller";
-import verifyAuthTokenMiddleware from "../middlewares/verifyAuthToken.middleware";
 import verifyIsAdmMiddleware from "../middlewares/verifyIsAdm.middleware";
 
 const categoriesRouter = Router();
