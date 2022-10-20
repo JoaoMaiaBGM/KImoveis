@@ -10,5 +10,5 @@ export class Category {
   name: string;
 
   @OneToMany((type) => Property, (property) => property.id)
-  property?: Property[];
+  properties: Property[];
 }
