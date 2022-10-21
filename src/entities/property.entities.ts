@@ -35,10 +35,10 @@ export class Property {
 
   @OneToOne((type) => Address, { eager: true })
   @JoinColumn()
-  adress: Address;
+  address: Address;
 
   @OneToMany((type) => Schedules, (schedule) => schedule.property)
-  schedules?: Schedules[];
+  schedules: Schedules[];
 
   @ManyToOne((type) => Category, { eager: true })
   category: Category;

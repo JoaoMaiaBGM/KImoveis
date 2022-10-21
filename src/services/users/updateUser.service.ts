@@ -15,7 +15,7 @@ const updateUserService = async (
   });
 
   if (!account) {
-    throw new AppError(400, "User not found");
+    throw new AppError(404, "User not found");
   }
   const keys = Object.keys(user);
   if (

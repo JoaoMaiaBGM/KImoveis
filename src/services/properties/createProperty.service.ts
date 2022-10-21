@@ -16,11 +16,11 @@ const createPropertyService = async ({
   const addressRepository = AppDataSource.getRepository(Address);
 
   if (state.length > 2) {
-    throw new AppError(403, "State must be informed only with initials");
+    throw new AppError(400, "State must be informed only with initials");
   }
 
   if (zipCode.length > 8) {
-    throw new AppError(403, "ZipCode don't have eight numbers");
+    throw new AppError(400, "ZipCode don't have eight numbers");
   }
 
   /* const stateLength = properties.find((property) => property.adress.state.length > 2 );
@@ -37,7 +37,7 @@ const createPropertyService = async ({
     id: categoryId,
   });
   if (!categoryExists) {
-    throw new AppError(400, "Category not found");
+    throw new AppError(404, "Category not found");
   }
 
   const adressExists = await addressRepository.findOneBy({
@@ -64,7 +64,7 @@ const createPropertyService = async ({
   const createdProperty = propertyRepository.create({
     value,
     size,
-    adress: createdAdress,
+    address: createdAdress,
     category: {
       id: categoryExists.id,
       name: categoryExists.name,
