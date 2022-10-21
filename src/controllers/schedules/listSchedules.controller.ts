@@ -1,6 +1,12 @@
 import { Request, Response } from "express";
-import listSchedulesService from "../../services/schedules/listSchedule.service";
+import listSchedulesService from "../../services/schedules/listSchedulesProperty.service";
 
-const listSchedulesController = async (req: Request, res: Response) => {};
+const listSchedulesPropertyController = async (req: Request, res: Response) => {
+  const propertyId = req.params.id;
 
-export default listSchedulesController;
+  const listedSchedules = await listSchedulesService(propertyId);
+
+  return res.status(200).json(listedSchedules);
+};
+
+export default listSchedulesPropertyController;
