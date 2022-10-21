@@ -23,16 +23,6 @@ const createPropertyService = async ({
     throw new AppError(400, "ZipCode don't have eight numbers");
   }
 
-  /* const stateLength = properties.find((property) => property.adress.state.length > 2 );
-  if(stateLength) {
-    throw new AppError(403, "State must be informed only with initials")
-  } */
-
-  /* const zipCodeLength = properties.find((property) => property.adress.zipCode.length > 8 );
-  if(zipCodeLength) {
-    throw new AppError(403, "ZipCode don't have eight numbers")
-  } */
-
   const categoryExists = await categoryRepository.findOneBy({
     id: categoryId,
   });

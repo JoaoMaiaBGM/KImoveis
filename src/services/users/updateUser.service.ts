@@ -1,13 +1,10 @@
-import bcrypt from "bcryptjs";
+import * as bcrypt from "bcryptjs";
 import { IUserUpdate, IUser } from "./../../interfaces/users/index";
 import AppDataSource from "../../data-source";
 import { User } from "../../entities/user.entities";
 import AppError from "../../errors/appError";
 
-const updateUserService = async (
-  id: string,
-  user: IUserUpdate
-): Promise<IUser> => {
+const updateUserService = async (id: string, user: IUserUpdate) => {
   const userRepository = AppDataSource.getRepository(User);
 
   const account = await userRepository.findOneBy({
@@ -26,17 +23,21 @@ const updateUserService = async (
     throw new AppError(401, "User without permissions");
   }
 
-  if (user.password) {
-    user.password = bcrypt.hashSync(user.password, 10);
-  }
-
-  await userRepository.update(id, user);
-
-  const updatedUser = await userRepository.findOneBy({
-    id: id,
+  await userRepository.update(id, {
+    name: user.name,
+    email: user.email,
+    password: user.password
+      ? await bcrypt.hash(user.password, 10)
+      : account.password,
   });
 
-  return updatedUser!;
+  const updatedUser = await userRepository.findOne({
+    where: {
+      id: id,
+    },
+  });
+
+  return { ...updatedUser, password: undefined };
 };
 
 export default updateUserService;

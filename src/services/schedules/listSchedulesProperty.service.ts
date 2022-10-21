@@ -1,23 +1,21 @@
 import AppDataSource from "../../data-source";
-import { Schedules } from "../../entities/scheduleUsersProperties.entities";
 import { Property } from "../../entities/property.entities";
 import AppError from "../../errors/appError";
 
 const listSchedulesPropertyService = async (
   propertyId: string
-): Promise<Property[]> => {
-  const scheduleRepository = AppDataSource.getRepository(Schedules);
+): Promise<Property | null> => {
   const propertyRepository = AppDataSource.getRepository(Property);
 
-  const listSchedulesProperty = await scheduleRepository.findOneBy({
+  const listProperty = await propertyRepository.findOneBy({
     id: propertyId,
   });
 
-  if (!listSchedulesProperty) {
+  if (!listProperty) {
     throw new AppError(404, "Property not found");
   }
 
-  const listedScheduleByProperty = await propertyRepository.find({
+  const listedScheduleByProperty = await propertyRepository.findOne({
     where: {
       id: propertyId,
     },

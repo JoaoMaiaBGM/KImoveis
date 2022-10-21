@@ -1,4 +1,3 @@
-import { Category } from "./../../entities/category.entities";
 import { Request, Response } from "express";
 import listCategoryByIdService from "../../services/categories/listCategoryById.service";
 

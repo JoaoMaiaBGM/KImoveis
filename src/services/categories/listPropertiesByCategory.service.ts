@@ -5,7 +5,7 @@ import AppError from "../../errors/appError";
 
 const listPropertiesByCategoryService = async (
   categoryId: string
-): Promise<Property[]> => {
+): Promise<Category> => {
   const categoryRepository = AppDataSource.getRepository(Category);
   const propertyRepository = AppDataSource.getRepository(Property);
 
@@ -17,18 +17,15 @@ const listPropertiesByCategoryService = async (
     throw new AppError(404, "Category not found");
   }
 
-  const listPropertyByCategory = await propertyRepository.find({
+  const properties = await propertyRepository.find({
     where: {
       category: {
         id: listCategory.id,
       },
     },
-    relations: {
-      category: true,
-    },
   });
 
-  return listPropertyByCategory;
+  return { ...listCategory, properties };
 };
 
 export default listPropertiesByCategoryService;

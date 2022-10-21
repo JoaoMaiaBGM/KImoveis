@@ -6,7 +6,7 @@ const listSchedulesPropertyController = async (req: Request, res: Response) => {
 
   const listedSchedules = await listSchedulesService(propertyId);
 
-  return res.status(200).json(listedSchedules);
+  return res.status(200).send(listedSchedules);
 };
 
 export default listSchedulesPropertyController;
